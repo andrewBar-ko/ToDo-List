@@ -1,6 +1,6 @@
 'use strict';
 
-let todoControl = document.querySelector('.todo-control'),
+const todoControl = document.querySelector('.todo-control'),
     headerInput = document.querySelector('.header-input'),
     headerBtn = document.querySelector('.header-button'),
     todoList = document.querySelector('.todo-list'),
@@ -66,6 +66,5 @@ todoControl.addEventListener('submit', function(e) {
 });
 
 // Удаление дел
-
 
 render();
