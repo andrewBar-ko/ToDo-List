@@ -39,6 +39,7 @@ const render = function() {
         // Добавление в выполненые(не выполненые)
         btnComplete.addEventListener('click', function() {
             item.completed = !item.completed;
+            localStorage.setItem('item', JSON.stringify(todoData));
             render();
         });
 
@@ -65,20 +66,6 @@ todoControl.addEventListener('submit', function(e) {
 });
 
 // Удаление дел
-// removeBtn.addEventListener('click', function() {
-//     todoData.forEach(function(i) {
 
-//     };
-// });
 
 render();
-
-
-
-
-
-// todoList.addEventListener('click', function(e) {
-//         const target = e.target;
-//         const removeBtn = target.closest('.todo-remove');
-//         console.log(removeBtn);
-//     });
