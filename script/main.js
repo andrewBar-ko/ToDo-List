@@ -3,9 +3,10 @@
 const todoControl = document.querySelector('.todo-control'),
     headerInput = document.querySelector('.header-input'),
     headerBtn = document.querySelector('.header-button'),
+    todo = document.querySelector('.todo'),
     todoList = document.querySelector('.todo-list'),
     textTodo = document.querySelector('.text-todo'),
-    removeBtn = document.querySelector('.todo-remove'),
+    
     todoCompleted = document.querySelector('.todo-completed');
 
 // Массив с получеными данными о планах
@@ -43,6 +44,17 @@ const render = function() {
             render();
         });
 
+        // Удаление дел
+        const btnRemove = li.querySelector('.todo-remove');
+
+        btnRemove.addEventListener('click', function() {
+            
+            delete todoData[li];
+
+            console.log(li);
+            localStorage.setItem('item', JSON.stringify(todoData));
+            render();
+        });
     });
  
 };
@@ -65,6 +77,24 @@ todoControl.addEventListener('submit', function(e) {
  
 });
 
-// Удаление дел
 
+// const btnRemove =document.querySelector('.todo-remove').onclick = function(e) {
+//     const btn = e.target.closest('.todo-item');
+//     if (!btn) {
+//       return;
+//     }
+    
+//     btn.parentElement.remove();
+    // btn.closest('li').remove();
+//   }
+
+// document.querySelector('ul').onclick = function(e) {
+//     const btn = e.target.closest('.delete');
+//     if (!btn) {
+//       return;
+//     }
+    
+//     btn.parentElement.remove();
+    // btn.closest('li').remove();
+//   }
 render();
