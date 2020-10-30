@@ -20,10 +20,6 @@ const render = function() {
     todoData.forEach(function(item) {
         let li = document.createElement('li');
         li.classList.add('todo-item');
-
-        if(item.value.trim() === '') {
-            return true;
-        }
         
         li.innerHTML += '<span class="text-todo">' + item.value + '</span>' +
             '<div class="todo-buttons">' +
@@ -31,7 +27,6 @@ const render = function() {
                 '<button class="todo-complete"></button>' +
             '</div>';
 
-        
         // Метка о выполнении
         const btnComplete = li.querySelector('.todo-complete');
 
@@ -78,8 +73,11 @@ todoControl.addEventListener('submit', function(e) {
         value: headerInput.value,
         completed: false, 
     };
-
-    todoData.push(newTodo);
+    
+    // Проверка на пустоту и добавление в массив
+    if(headerInput.value.trim() !== '') {
+        todoData.push(newTodo);
+    }
     
     localStorage.setItem('item', JSON.stringify(todoData));
     headerInput.value = '';
