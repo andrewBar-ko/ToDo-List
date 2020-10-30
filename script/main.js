@@ -21,12 +21,17 @@ const render = function() {
         let li = document.createElement('li');
         li.classList.add('todo-item');
 
+        if(item.value.trim() === '') {
+            return true;
+        }
+        
         li.innerHTML += '<span class="text-todo">' + item.value + '</span>' +
             '<div class="todo-buttons">' +
                 '<button class="todo-remove"></button>' +
                 '<button class="todo-complete"></button>' +
             '</div>';
 
+        
         // Метка о выполнении
         const btnComplete = li.querySelector('.todo-complete');
 
@@ -57,16 +62,8 @@ const render = function() {
             });
             
             localStorage.setItem('item', JSON.stringify(todoData));
+             
             render();
-        });
-
-        // Пустому инпуту - НЕТ!!!
-        headerBtn.addEventListener('click', function() {
-     
-            if(headerInput.value === '') {
-                headerInput.required = true;
-            }        
-
         });
 
     });
@@ -76,10 +73,10 @@ const render = function() {
 // К форме todoControl навешиваем событие submit
 todoControl.addEventListener('submit', function(e) {
     e.preventDefault();  // Отмена перезагрузки страницы
-    
+
     const newTodo = {
         value: headerInput.value,
-        completed: false,
+        completed: false, 
     };
 
     todoData.push(newTodo);
