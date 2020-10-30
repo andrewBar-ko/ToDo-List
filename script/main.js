@@ -10,6 +10,7 @@ const todoControl = document.querySelector('.todo-control'),
 
 // Массив с получеными данными о планах
 let todoData = localStorage.getItem('item') ?
+// извличение из JSON и декодировка в массив
  JSON.parse(localStorage.getItem('item')) : [];
 
 // Добавление дел на страницу
@@ -68,17 +69,19 @@ const render = function() {
 // К форме todoControl навешиваем событие submit
 todoControl.addEventListener('submit', function(e) {
     e.preventDefault();  // Отмена перезагрузки страницы
-
+    
+    // Новое дело
     const newTodo = {
         value: headerInput.value,
         completed: false, 
     };
-    
+
     // Проверка на пустоту и добавление в массив
     if(headerInput.value.trim() !== '') {
         todoData.push(newTodo);
     }
     
+    // Кодировка массива в JSON и сохранение в обьекте localStorage
     localStorage.setItem('item', JSON.stringify(todoData));
     headerInput.value = '';
      
