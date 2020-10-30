@@ -6,7 +6,6 @@ const todoControl = document.querySelector('.todo-control'),
     todo = document.querySelector('.todo'),
     todoList = document.querySelector('.todo-list'),
     textTodo = document.querySelector('.text-todo'),
-    
     todoCompleted = document.querySelector('.todo-completed');
 
 // Массив с получеными данными о планах
@@ -47,14 +46,29 @@ const render = function() {
         // Удаление дел
         const btnRemove = li.querySelector('.todo-remove');
 
-        btnRemove.addEventListener('click', function() {
-            
-            delete todoData[li];
+        btnRemove.addEventListener('click', function(e) {
 
-            console.log(li);
+            todoData.forEach(function() {
+                for (let i = todoData.length; i--;) {
+                    if (todoData[i] === item) {
+                        todoData.splice(i, 1);
+                    }
+                }
+            });
+            
             localStorage.setItem('item', JSON.stringify(todoData));
             render();
         });
+
+        // Пустому инпуту - НЕТ!!!
+        headerBtn.addEventListener('click', function() {
+     
+            if(headerInput.value === '') {
+                headerInput.required = true;
+            }        
+
+        });
+
     });
  
 };
@@ -62,7 +76,7 @@ const render = function() {
 // К форме todoControl навешиваем событие submit
 todoControl.addEventListener('submit', function(e) {
     e.preventDefault();  // Отмена перезагрузки страницы
-
+    
     const newTodo = {
         value: headerInput.value,
         completed: false,
@@ -77,24 +91,4 @@ todoControl.addEventListener('submit', function(e) {
  
 });
 
-
-// const btnRemove =document.querySelector('.todo-remove').onclick = function(e) {
-//     const btn = e.target.closest('.todo-item');
-//     if (!btn) {
-//       return;
-//     }
-    
-//     btn.parentElement.remove();
-    // btn.closest('li').remove();
-//   }
-
-// document.querySelector('ul').onclick = function(e) {
-//     const btn = e.target.closest('.delete');
-//     if (!btn) {
-//       return;
-//     }
-    
-//     btn.parentElement.remove();
-    // btn.closest('li').remove();
-//   }
 render();
