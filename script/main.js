@@ -106,9 +106,9 @@ class Todo {
 
         if (this.input.value.trim()) {
             const newTodo = {
-            value: this.input.value,
-            completed: false,
-            key: this.generateKey()
+                value: this.input.value,
+                completed: false,
+                key: this.generateKey()
             };
 
             this.todoData.set(newTodo.key, newTodo);
